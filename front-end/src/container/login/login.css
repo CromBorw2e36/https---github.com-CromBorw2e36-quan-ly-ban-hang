@@ -1,0 +1,14 @@
+.login-father {
+    height: 100vh !important;
+    width: 100vh !important;
+    background-image: url('../../assets/backgroundLogin.jpg');
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    position: relative !important;
+}
+
+.login-children {
+    position: absolute !important;
+    top: 50 !important;
+    left: 50 !important;
+}
