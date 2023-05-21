@@ -1,13 +1,34 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.cc-input .MuiInputBase-root {
+    font-size: 14px;
+    height: 30px !important;
+}
+
+.cc-label {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+.title-navbar {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    color: #2295FF !important;
+}
+
+.icon-close-button {
+    color: gray !important;
+}
+
+.icon-close-button:hover {
+    color: red !important;
 }

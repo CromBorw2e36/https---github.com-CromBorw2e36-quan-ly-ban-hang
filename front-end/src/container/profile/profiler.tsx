@@ -1,7 +1,15 @@
-import { Box, CardMedia, Typography } from '@mui/material'
+import { Box, Button, CardMedia, Typography } from '@mui/material'
 import React from 'react'
+import ChangePassword from '../actions/change-password/change-password';
 
 const Profiler = () => {
+
+
+  const [isChangePassword, setIsChangePassword] = React.useState<boolean>(false);
+
+
+
+
   return (
     <Box className="w-100">
       <Typography className="text-center h-2 text-danger mb-5">Thông tin tài khoản</Typography>
@@ -21,8 +29,23 @@ const Profiler = () => {
         <Typography className='mb-3'>CCCD: <strong>123123123123</strong></Typography>
         <Typography className='mb-3'>Biển số xe: <strong>66-F1 85109</strong></Typography>
         <Typography className='mb-3'>Ghi chú: <strong>Không có mô tả</strong></Typography>
-      </Box>
+        <Button variant='text' onClick={() => setIsChangePassword(true) }> Đổi mật khẩu</Button>
     </Box>
+      {/* đổi mật khẩu */ }
+  {
+    React.useMemo(() => {
+      return (
+        <ChangePassword
+          isOpen={isChangePassword}
+          setClose={(value: boolean) => setIsChangePassword(value)}
+        />
+      )
+    }, [isChangePassword])
+  }
+    </Box >
+
+
+
   )
 }
 

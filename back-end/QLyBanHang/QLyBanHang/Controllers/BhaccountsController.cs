@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using QLyBanHang.Models;
 
 namespace QLyBanHang.Controllers
@@ -22,32 +22,34 @@ namespace QLyBanHang.Controllers
         }
 
         // GET: api/Bhaccounts
+        [Route("[controller]/getAll")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bhaccount>>> GetBhaccounts()
         {
+           
+          if (_context.Bhaccounts == null)
+          {
+              return NotFound();
+          }
             return await _context.Bhaccounts.ToListAsync();
         }
 
         // GET: api/Bhaccounts/5
-        [Route("Login")]
-        [HttpPost]
-        public async Task<ActionResult<Bhaccount>> GetBhaccount(Bhaccount bhaccount)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Bhaccount>> GetBhaccount(string id)
         {
-            var bhaccountCheck = await _context.Bhaccounts.FindAsync(bhaccount.Username);
-            if (bhaccountCheck == null)
+          if (_context.Bhaccounts == null)
+          {
+              return NotFound();
+          }
+            var bhaccount = await _context.Bhaccounts.FindAsync(id);
+
+            if (bhaccount == null)
             {
                 return NotFound();
             }
-            else if (bhaccountCheck.Password == bhaccount.Password)
-            {
 
-                return Ok(new {status = 0, message = "Đăng nhập thành công"});
-            }
-            else
-            {
-
-                return Ok(new { status = 1, message = "Đăng nhập thất bại" });
-            }
+            return bhaccount;
         }
 
         // PUT: api/Bhaccounts/5
@@ -86,6 +88,10 @@ namespace QLyBanHang.Controllers
         [HttpPost]
         public async Task<ActionResult<Bhaccount>> PostBhaccount(Bhaccount bhaccount)
         {
+          if (_context.Bhaccounts == null)
+          {
+              return Problem("Entity set 'QlyBanHangContext.Bhaccounts'  is null.");
+          }
             _context.Bhaccounts.Add(bhaccount);
             try
             {
@@ -110,6 +116,10 @@ namespace QLyBanHang.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBhaccount(string id)
         {
+            if (_context.Bhaccounts == null)
+            {
+                return NotFound();
+            }
             var bhaccount = await _context.Bhaccounts.FindAsync(id);
             if (bhaccount == null)
             {
@@ -124,7 +134,7 @@ namespace QLyBanHang.Controllers
 
         private bool BhaccountExists(string id)
         {
-            return _context.Bhaccounts.Any(e => e.Username == id);
+            return (_context.Bhaccounts?.Any(e => e.Username == id)).GetValueOrDefault();
         }
     }
 }

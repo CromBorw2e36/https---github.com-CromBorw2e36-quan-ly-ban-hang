@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.4.33213.308
+VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLyBanHang", "QLyBanHang\QLyBanHang.csproj", "{F606D3CF-FAE2-44C1-8CDA-5533EE0F019A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLyBanHang", "QLyBanHang\QLyBanHang.csproj", "{05E2A9E7-D536-463A-996E-FC8A0FD5AE51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F606D3CF-FAE2-44C1-8CDA-5533EE0F019A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F606D3CF-FAE2-44C1-8CDA-5533EE0F019A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F606D3CF-FAE2-44C1-8CDA-5533EE0F019A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F606D3CF-FAE2-44C1-8CDA-5533EE0F019A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E2A9E7-D536-463A-996E-FC8A0FD5AE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E2A9E7-D536-463A-996E-FC8A0FD5AE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E2A9E7-D536-463A-996E-FC8A0FD5AE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E2A9E7-D536-463A-996E-FC8A0FD5AE51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C8BDF834-390A-402E-84E2-B1DBBB257AB2}
+		SolutionGuid = {98FA1780-1BD7-4667-A2A3-008DCB89E861}
 	EndGlobalSection
 EndGlobal

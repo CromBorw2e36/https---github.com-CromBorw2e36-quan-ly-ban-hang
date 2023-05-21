@@ -8,12 +8,11 @@ import Login from './container/login/login';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+
 root.render(
   <BrowserRouter>
-    <Routes>
-      <Route path='/*' element={<App />} />
-      <Route path="/" element={<Login />} />
-    </Routes>
+    <App />
   </BrowserRouter>
 );
 

@@ -1,28 +1,53 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using QLyBanHang.Models;
 
-namespace QLyBanHang
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddCors(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000",
+                                                "https://localhost:3000",
+                                                "https://localhost:3001",
+                                                "http://localhost:3001"
+                                                ).AllowAnyMethod().AllowAnyHeader();
+                      });
+});
 
+// Add services to the container.
 
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+builder.Services.AddDbContext<QlyBanHangContext>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+app.UseCors(MyAllowSpecificOrigins);
+
+app.UseRouting();
+
+app.UseStaticFiles();
+
+app.UseHttpsRedirection();
+
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

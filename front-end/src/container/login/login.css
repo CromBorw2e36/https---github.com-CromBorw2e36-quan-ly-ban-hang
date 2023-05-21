@@ -1,14 +1,75 @@
 .login-father {
     height: 100vh !important;
-    width: 100vh !important;
-    background-image: url('../../assets/backgroundLogin.jpg');
+    width: 100vw !important;
+    background-image: url('../../assets/backgroundLogin.jpg') !important;
     background-repeat: no-repeat !important;
-    background-size: contain !important;
+    background-size: cover !important;
     position: relative !important;
 }
 
-.login-children {
+.login-dialog {
+    z-index: 999;
     position: absolute !important;
-    top: 50 !important;
-    left: 50 !important;
+    top: 50% !important;
+    right: 50% !important;
+    width: 300px !important;
+    height: auto !important;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    transform: translate(50%, -50%);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.cc-input-login {
+    width: 100% !important;
+    font-size: 12px !important;
+}
+
+.MuiInputBase-inputSizeSmall {
+    background-color: #fff !important;
+}
+
+#sysMenu .MuiPaper-root {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+#sysMenu1 .MuiPaper-root {
+    width: 50vw !important;
+    height: 100vh !important;
+}
+
+#sysMenu2 .MuiPaper-root {
+    width: 20vw !important;
+    height: 100vh !important;
+}
+
+#sysMenu3 .MuiPaper-root {
+    width: 50vw !important;
+    height: 50vh !important;
+}
+
+#sysMenu4 .MuiPaper-root {
+    width: 30vw !important;
+    min-height: 25vh !important;
+}
+
+@media screen and (max-width: 900px) {
+    #sysMenu1 .MuiPaper-root {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+    #sysMenu2 .MuiPaper-root {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+    #sysMenu3 .MuiPaper-root {
+        width: 100vw !important;
+        min-height: 25vh !important;
+    }
+    #sysMenu4 .MuiPaper-root {
+        width: 100vw !important;
+        min-height: 25vh !important;
+    }
 }

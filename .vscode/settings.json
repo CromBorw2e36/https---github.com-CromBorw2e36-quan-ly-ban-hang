@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "MSSQL",
+            "name": ".",
+            "connectString": "Data Source=KHANHNGUYENLAPT;Initial Catalog=QLyBanHang;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"
+        }
+    ]
+}
