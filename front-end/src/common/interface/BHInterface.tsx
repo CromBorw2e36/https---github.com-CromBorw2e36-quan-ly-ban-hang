@@ -68,93 +68,94 @@ export interface SysRoleRightModel {
     icon?: string | undefined;
     show?: string | undefined;
     enable?: boolean | undefined;
+    color?: string | undefined;
 }
 
 export interface ProductionModel {
-    Id?: string | undefined;
-    Name?: string | undefined;
-    About?: string | undefined;
-    Review?: number | undefined;
-    Total?: number | undefined;
-    Price?: number | undefined;
-    PricePersent?: number | undefined;
-    Images?: string | undefined;
-    C_Date?: Date | undefined;
-    C_User?: string | undefined;
-    Status?: boolean | undefined;
-    Show?: boolean | undefined;
-    E_Date?: Date | undefined;
+    id?: string | undefined;
+    name?: string | undefined;
+    about?: string | undefined;
+    review?: number | undefined;
+    total?: number | undefined;
+    price?: number | undefined;
+    pricePersent?: number | undefined;
+    images?: string | undefined;
+    c_Date?: Date | undefined;
+    c_User?: string | undefined;
+    status?: boolean | undefined;
+    show?: boolean | undefined;
+    e_Date?: Date | undefined;
     ma_ch?: string | undefined;
 }
 
-export class ProductionModel{
+export class ProductionModel {
 
-    Id?: string | undefined;
-    Name?: string | undefined;
-    About?: string | undefined;
-    Review?: number | undefined;
-    Total?: number | undefined;
-    Price?: number | undefined;
-    PricePersent?: number | undefined;
-    Images?: string | undefined;
-    C_Date?: Date | undefined;
-    C_User?: string | undefined;
-    Status?: boolean | undefined;
-    Show?: boolean | undefined;
-    E_Date?: Date | undefined;
+    id?: string | undefined;
+    name?: string | undefined;
+    about?: string | undefined;
+    review?: number | undefined;
+    total?: number | undefined;
+    price?: number | undefined;
+    pricePersent?: number | undefined;
+    images?: string | undefined;
+    c_Date?: Date | undefined;
+    c_User?: string | undefined;
+    status?: boolean | undefined;
+    show?: boolean | undefined;
+    e_Date?: Date | undefined;
     ma_ch?: string | undefined;
-    
 
-    constructor(){
-        this.Id = undefined;
-        this.Name = undefined;
-        this.About = undefined;
-        this.Review = undefined;
-        this.Total = undefined;
-        this.Price = undefined;
-        this.PricePersent = undefined;
-        this.Images= undefined;
-        this.C_Date  = undefined
-        this.C_User = undefined;
-        this.Status = undefined;
-        this.Show = undefined;
-        this.E_Date = undefined;
+
+    constructor() {
+        this.id = undefined;
+        this.name = undefined;
+        this.about = undefined;
+        this.review = undefined;
+        this.total = undefined;
+        this.price = undefined;
+        this.pricePersent = undefined;
+        this.images = undefined;
+        this.c_Date = undefined
+        this.c_User = undefined;
+        this.status = undefined;
+        this.show = undefined;
+        this.e_Date = undefined;
         this.ma_ch = undefined;
     }
 
 }
 
 export interface SysRawTableModel {
-    id?:            string | undefined;
-    menuId?:        string | undefined;
-    name?:          string | undefined;
-    nameEn?:            string | undefined;
-    dataType?:      string | undefined;
-    align?:         string | undefined;
-    show?:          boolean | undefined;
-    numberOrder?:   number | undefined;
-    cDate?:         Date | undefined;
-    cUser?:         string | undefined;
+    id?: string | undefined;
+    menuId?: string | undefined;
+    name?: string | undefined;
+    nameEn?: string | undefined;
+    dataType?: string | undefined;
+    align?: string | undefined;
+    show?: boolean | undefined;
+    numberOrder?: number | undefined;
+    cDate?: Date | undefined;
+    cUser?: string | undefined;
 }
 
 
 
-export class SysRawTableModel{
+export class SysRawTableModel {
 
-    id?:            string | undefined;
-    menuId?:            string | undefined;
+    id?: string | undefined;
+    menuId?: string | undefined;
     tableColumns?: string | undefined;
-    name?:          string | undefined;
-    nameEn?:            string | undefined;
-    dataType?:      string | undefined;
-    align?:             string | undefined;
-    show?:              boolean | undefined;
-    numberOrder?:       number | undefined;
-    cDate?:             Date | undefined;
-    cUser?:             string | undefined;
+    name?: string | undefined;
+    nameEn?: string | undefined;
+    dataType?: string | undefined;
+    align?: string | undefined;
+    show?: boolean | undefined;
+    numberOrder?: number | undefined;
+    cDate?: Date | undefined;
+    cUser?: string | undefined;
 
 
-    constructor(){
+    constructor() {
         this.id = undefined;
         this.menuId = undefined;
         this.tableColumns = undefined;
@@ -163,7 +164,7 @@ export class SysRawTableModel{
         this.dataType = undefined;
         this.align = undefined;
         this.show = undefined;
-        this.numberOrder= undefined;
+        this.numberOrder = undefined;
         this.cDate = new Date();
         this.cUser = undefined;
     }
@@ -191,10 +192,10 @@ export class BhClient {
 
 }
 
-export class SysClient{
+export class SysClient {
 
 
-    sysRawTableGet(body: SysRawTableModel){
+    sysRawTableGet(body: SysRawTableModel) {
         return postApiAll("/api/SysMenuRoles/SysRawTableGet", body);
     }
 

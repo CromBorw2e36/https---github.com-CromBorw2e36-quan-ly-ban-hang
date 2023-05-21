@@ -70,6 +70,19 @@ namespace QLyBanHang_A.Controllers
         {
             if (product == null || product.ma_ch == null) { return BadRequest(); }
 
+            if(product.Name == null) { return Ok(new Message(1, "Không có tên sản phẩm")); }
+            if(product.Price == null) { return Ok(new Message(1, "Sản phẩm phải có giá")); }
+
+            if(
+                 product.Price < 0
+                && product.Total < 0
+                && product.PricePersent < 0
+                )
+            {
+                return Ok(new Message(1, "Giá trị nhập vào không hợp lệ"));
+            }
+            
+
             if (product != null && BhCompanyContactExits(product.ma_ch))
             {
                 BhproductDetail newProduct = new BhproductDetail();
@@ -115,6 +128,19 @@ namespace QLyBanHang_A.Controllers
         public async Task<ActionResult> ProductUpd(Production product)
         {
             if (product == null || product.ma_ch == null) { return BadRequest(); }
+
+            if (product.Name == null) { return Ok(new Message(1, "Không có tên sản phẩm")); }
+            if (product.Price == null) { return Ok(new Message(1, "Sản phẩm phải có giá")); }
+
+            if (
+                 product.Price < 0
+                && product.Total < 0
+                && product.PricePersent < 0
+                )
+            {
+                return Ok(new Message(1, "Giá trị nhập vào không hợp lệ"));
+            }
+
 
             if (product != null && BhCompanyContactExits(product.ma_ch))
             {
