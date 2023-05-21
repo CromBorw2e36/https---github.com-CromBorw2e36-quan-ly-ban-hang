@@ -42,6 +42,13 @@ namespace QLyBanHang_A.Controllers
             
             if(roleRight.Menuid != null && roleRight.Menuid.Length > 0)
             {
+
+                if(roleRight.Show != null)
+                {
+                    var qSysRoleRightShow = await _context.SysRoleRighs.Where(p => p.Menuid == roleRight.Menuid && p.Show == roleRight.Show).OrderBy(p => p.MenuStt).ToListAsync();
+                    return Ok(qSysRoleRightShow);
+                }
+
                 var qSysRoleRight = await _context.SysRoleRighs.Where(p=> p.Menuid == roleRight.Menuid).OrderBy(p=> p.MenuStt).ToListAsync();
                 return Ok(qSysRoleRight);
             }

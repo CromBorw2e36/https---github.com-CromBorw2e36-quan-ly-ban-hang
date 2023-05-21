@@ -736,6 +736,10 @@ public partial class QlyBanHangContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("show");
+            entity.Property(e => e.Color)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("color");
         });
 
 

@@ -1,13 +1,14 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 interface IProps {
     title: string,
     color?: string | undefined,
-    fontSize?: number | undefined
+    fontSize?: number | undefined,
+    export?: (data: any) => void;
 }
 
 const Navbar = (props: IProps) => {
@@ -27,25 +28,17 @@ const Navbar = (props: IProps) => {
     }
 
     return (
-        <Box className="w-100"
-            sx={{
-                minHeight: '30px',
-                paddingLeft: '2rem', 
-                paddingTop: '1rem'
-               
-            }}
-        >
-            {/* <ArrowBackIcon color="primary" onClick={backPre}/> */}
-            <Typography
-                sx={{
-                    color: data.color,
-                    fontSize: data.fontSize,
-                    fontWeight: '500'
-                }}
-            >
-                {data.title}
-            </Typography>
-        </Box>
+        <div className="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 className="h3 mb-0 text-gray-800" style={{ color: props.color }}>{props.title}</h1>
+            {
+                props.export
+                && (
+                    <Link to={""} className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        className="fas fa-download fa-sm text-white-50"></i> Xuất báo cáo
+                    </Link>
+                )
+            }
+        </div>
     )
 }
 

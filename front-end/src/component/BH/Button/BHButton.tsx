@@ -10,6 +10,7 @@ interface IProps {
     clickAction?: (data: any) => void;
     size?: string | undefined;
     class?: string | undefined;
+    idItemSelected?: string | undefined;
 }
 
 
@@ -26,7 +27,7 @@ const BHButton = (props: IProps) => {
 
                 color={btn.color}
 
-                disabled={btn.disabled}
+                disabled={props.idItemSelected ? false : props.disable}
 
                 size={btn.size}
 

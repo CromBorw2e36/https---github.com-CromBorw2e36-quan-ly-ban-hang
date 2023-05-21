@@ -13,6 +13,8 @@ import { SysMenuRoleModel } from '../../common/interface/BHInterface'
 import { postApiAll } from '../../common/api/get-apit'
 import { CommonConfig } from '../../common/commonConfig'
 import { link } from 'fs'
+import Sidebar from '../../component/BH/Theme/Sidebar/Sidebar'
+import Toolbar from '../../component/BH/Theme/Toolbar/Toolbar'
 
 
 const Index = () => {
@@ -47,7 +49,7 @@ const Index = () => {
             })
                 .then(res => {
                     setSysMenus(res);
-                    if(res) {
+                    if (res) {
                         handleClick(res[0]?.menuid)
                     }
                 })
@@ -80,63 +82,41 @@ const Index = () => {
     }
 
     return (
-        <Box
-            style={{ width: '100vw', height: '100vh', padding: 0, display: 'flex' }}
-        >
-            <Box
-                style={{ width: '20vw', height: '100%', backgroundColor: '#cbd5e1', margin: 0 }}
-            >
-                {
-                    sysMenus
-                    && sysMenus.map(itemMenu => (
-                        <Link className="nav-link" key={itemMenu.id} to={itemMenu?.link!} onClick={() => handleClick(itemMenu?.menuid || "")}>
-                            <Button style={{ width: '100%' }}
-                                startIcon={
-                                    <DashboardIcon />
-                                }
-                            >
-                                {itemMenu.name}
-                            </Button>
-                        </Link>
-                    ))
-                }
-                <Link className="nav-link" to="/logout">
-                    <Button style={{ width: '100%' }}
-                        onClick={handleLogout}
-                    >
-                        Đăng xuất
-                    </Button>
-                </Link>
-            </Box>
-            <Box
-                style={{ width: '80vw', height: '100%', backgroundColor: '#f1f5f9', margin: 0 }}
-            >
-                <Routes>
 
-                    {
-                        sysMenus
-                        && sysMenus.map(itemMenu => {
-                            return (
-                                itemMenu.link
-                                && itemMenu.component
-                                && (
-                                    <Route key={itemMenu.link} path={itemMenu.link} Component={CommonConfig[itemMenu.component.toLocaleUpperCase()]} />
-                                )
-                            )
-                        })
-                    }
+        <div id="wrapper">
+            {
+                sysMenus
+                && <Sidebar
+                    sysMenus={sysMenus}
+                    handleClick={(data: any) => handleClick(data)}
+                    handleLogout={() => handleLogout()}
+                />
+            }
+            <div id="content-wrapper" className="d-flex flex-column">
+                <div id="content">
 
-                    {/* <Route path="/register" element={<Register />} />
-                    <Route path="/notfound-404" element={<Notfound404 />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/production" element={<Production />} />
-                    <Route path="/payment-voucher" element={<PaymentVoucher />} />
-                    <Route path="/profiler" element={<Profiler />} />
-                    <Route path="/menu" element={<MenuManager />} /> */}
-                    {/* <Route path="/menu-manager" element={<MenuManager />} /> */}
-                </Routes>
-            </Box>
-        </Box >
+                    <Toolbar />
+                    {/* <!-- Begin Page Content --> */}
+                    <div className="container-fluid">
+                        <Routes>
+
+                            {
+                                sysMenus
+                                && sysMenus.map(itemMenu => {
+                                    return (
+                                        itemMenu.link
+                                        && itemMenu.component
+                                        && (
+                                            <Route key={itemMenu.link} path={itemMenu.link} Component={CommonConfig[itemMenu.component.toLocaleUpperCase()] || Notfound404} />
+                                        )
+                                    )
+                                })
+                            }
+                        </Routes>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }
 

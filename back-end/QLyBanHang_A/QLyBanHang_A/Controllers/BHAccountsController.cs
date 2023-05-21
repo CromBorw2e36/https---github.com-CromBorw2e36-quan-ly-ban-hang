@@ -150,6 +150,24 @@ namespace QLyBanHang_A.Controllers
                         else
                         {
                             var qUserInfo = await _context.BhuserInfos.FirstOrDefaultAsync<BhuserInfo>(p => p.Username == qUser.Username);
+                            
+                            var account = _context.Bhaccounts.Where<Bhaccount>(p => p.Username == qUser.Username).FirstOrDefault();
+
+                            if (account != null)
+                            {
+                                account.Enter = DateTime.UtcNow.AddHours(7);
+                            }
+
+                            try
+                            {
+                                _context.SaveChangesAsync();
+                            }
+                            catch
+                            {
+                                return BadRequest(new Message(1, "Lỗi kiểm tra đăng nhập"));
+                            }
+
+
                             if (qUserInfo != null)
                             {
                                 LoginM UserItem = new LoginM()

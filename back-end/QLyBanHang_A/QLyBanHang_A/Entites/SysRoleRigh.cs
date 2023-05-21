@@ -22,4 +22,6 @@ public partial class SysRoleRigh
     public string? Show { get; set; }
 
     public bool? Enable { get; set; }
+
+    public string? Color { get; set; }
 }
