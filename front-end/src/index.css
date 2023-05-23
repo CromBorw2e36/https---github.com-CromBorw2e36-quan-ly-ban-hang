@@ -32,3 +32,77 @@ code {
 .icon-close-button:hover {
     color: red !important;
 }
+
+#sysMenu .MuiDialog-container .MuiDialog-paper {
+    width: 25vw !important;
+    height: 100vh !important;
+}
+
+#sysMenu1 .MuiDialog-container .MuiDialog-paper {
+    width: 50vw !important;
+    height: 100vh !important;
+}
+
+#sysMenu2 .MuiDialog-container .MuiDialog-paper {
+    width: 75vw !important;
+    height: 100vh !important;
+}
+
+#sysMenu3 .MuiDialog-container .MuiDialog-paper {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+#sysMenu-0 .MuiDialog-container .MuiDialog-paper {
+    width: 25vw !important;
+    height: 25vh !important;
+}
+
+#sysMenu-1 .MuiDialog-container .MuiDialog-paper {
+    width: 25vw !important;
+    height: 50vh !important;
+}
+
+#sysMenu-2 .MuiDialog-container .MuiDialog-paper {
+    width: 25vw !important;
+    height: 75vh !important;
+}
+
+#sysMenu1-0 .MuiDialog-container .MuiDialog-paper {
+    width: 50vw !important;
+    height: 25vh !important;
+}
+
+#sysMenu1-1 .MuiDialog-container .MuiDialog-paper {
+    width: 50vw !important;
+    height: 50vh !important;
+}
+
+#sysMenu1-2 .MuiDialog-container .MuiDialog-paper {
+    width: 50vw !important;
+    height: 75vh !important;
+}
+
+#sysMenu2-0 .MuiDialog-container .MuiDialog-paper {
+    width: 75vw !important;
+    height: 25vh !important;
+}
+
+#sysMenu2-1 .MuiDialog-container .MuiDialog-paper {
+    width: 75vw !important;
+    height: 50vh !important;
+}
+
+#sysMenu2-2 .MuiDialog-container .MuiDialog-paper {
+    width: 75vw !important;
+    height: 75vh !important;
+}
+
+@media screen and (max-width: 768px) {
+    #sysMenu .MuiDialog-container .MuiDialog-paper,
+    #sysMenu1 .MuiDialog-container .MuiDialog-paper,
+    #sysMenu2 .MuiDialog-container .MuiDialog-paper,
+    #sysMenu3 .MuiDialog-container .MuiDialog-paper {
+        width: 100vw !important;
+    }
+}

@@ -10,9 +10,13 @@ import axios from 'axios';
 import { BASE_URL } from '../../common/config';
 import { postApiAll } from '../../common/api/get-apit';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Loading from '../../component/linearIndeterminate/linearIndeterminate';
 
 
 const Login = () => {
+
+
+  const [isLoading, setLoading] = React.useState<boolean>(false);
 
   const [account, setAccount] = React.useState<UserModel>({} as UserModel);
 
@@ -34,20 +38,28 @@ const Login = () => {
 
   const handleSubmit = () => {
 
+    setLoading(true);
+
     if (account.password && account.username) {
 
       postApiAll('/api/BHAccounts/Login', account)
 
         .then(function (response) {
 
-          if (response.status === 0) {
-            localStorage.setItem("UserLogin", JSON.stringify({ ...response, isLogin: true }));
+          setTimeout(() => {
 
-            navigate('/dashboard');
-          }
+            if (response.status === 0) {
+              localStorage.setItem("UserLogin", JSON.stringify({ ...response, isLogin: true }));
+
+              navigate('/dashboard');
+            }
+            setLoading(false);
+          }, 1000);
 
         })
         .catch(function (error) {
+
+          setLoading(false);
 
           console.log(error);
 
@@ -71,6 +83,8 @@ const Login = () => {
       <Box className="login-dialog"
         translate='yes'
       >
+
+
         <Typography
           className="text-center text-danger m-3"
           variant='h4'
@@ -126,6 +140,9 @@ const Login = () => {
         </Box>
         <Paper elevation={3} />
       </Box>
+      
+      <Loading isLoading={isLoading} />
+
     </Box>
   )
 }

@@ -9,10 +9,12 @@ public partial class BhbillMaster
 
     public string? IdProduct { get; set; }
 
+    // khách hàng
     public string? IdCustomer { get; set; }
 
     public decimal? Price { get; set; }
 
+    // phần trăm giảm 
     public decimal? PricePersent { get; set; }
 
     public decimal? TotalPrice { get; set; }

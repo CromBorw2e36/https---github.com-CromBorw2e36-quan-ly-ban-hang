@@ -61,6 +61,8 @@ public partial class QlyBanHangContext : DbContext
 
     public virtual DbSet<SysRawTable> SysRawTables { get; set; }
 
+    public virtual DbSet<Bhreceipts> BhReceives { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=KHANHNGUYENLAPT;Initial Catalog=QLyBanHang;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
@@ -784,7 +786,37 @@ public partial class QlyBanHangContext : DbContext
             entity.Property(e => e.CUser)
                 .HasMaxLength(254)
                 .HasColumnName("c_user");
-            
+        });
+
+        modelBuilder.Entity<Bhreceipts>(entity =>
+        {
+            entity.ToTable("BHReceipt");
+
+            entity.Property(e => e.id)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("id");
+            entity.Property(e => e.number)
+                .HasMaxLength(50)
+                .HasColumnName("number");
+            entity.Property(e => e.idBillMaster)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("id_billM");
+            entity.Property(e => e.receiveMoney).HasColumnName("recevice_money");
+            entity.Property(e => e.change).HasColumnName("change");
+            entity.Property(e => e.totalMoney).HasColumnName("total_money");
+            entity.Property(e => e.status).HasColumnName("status");
+            entity.Property(e => e.cDate)
+                .HasDefaultValueSql(DateTime.UtcNow.AddHours(7).ToString())
+                .HasColumnName("c_date");
+            entity.Property(e => e.cUser)
+                .HasMaxLength(254)
+                .HasColumnName("c_user");
+            entity.Property(e => e.maCH)
+                .HasMaxLength(254)
+                .IsUnicode(false)
+                .HasColumnName("ma_CH");
 
         });
 

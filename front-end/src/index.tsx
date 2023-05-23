@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './container/login/login';
-
+import { SnackbarProvider } from 'notistack';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <SnackbarProvider maxSnack={3}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </SnackbarProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,12 +1,14 @@
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
-import Navbar from '../../component/navbar/navbar'
-import { postApiAll } from '../../common/api/get-apit';
-import BHButton from '../../component/BH/Button/BHButton';
-import { BhClient, ProductionModel, SysRoleRightModel } from '../../common/interface/BHInterface';
-import BHGroupButton from '../../component/BH/GroupButton/BHGroupButton';
-import BHDataGrid from '../../component/BH/DataGrid/BHDataGrid';
-import ActionMenuManager from '../actions/menu-manager/menu-manager';
+import Navbar from '../../../component/navbar/navbar'
+import { postApiAll } from '../../../common/api/get-apit';
+import BHButton from '../../../component/BH/Button/BHButton';
+import { BhClient, ProductionModel, SysRoleRightModel } from '../../../common/interface/BHInterface';
+import BHGroupButton from '../../../component/BH/GroupButton/BHGroupButton';
+import BHDataGrid from '../../../component/BH/DataGrid/BHDataGrid';
+import ActionMenuManager from '../../actions/menu-manager/menu-manager';
+import BHNotification from '../../../component/BH/Notification/Notification';
+import { useSnackbar } from 'notistack';
 
 interface IActions {
     open?: boolean | undefined;
@@ -32,6 +34,8 @@ const MenuManager = () => {
     const [dataTable, setDataTable] = useState<ProductionModel[]>([] as ProductionModel[]);
 
     const [productSelect, setProductSelect] = useState<ProductionModel[]>([] as ProductionModel[]);
+
+    const { enqueueSnackbar } = useSnackbar();
 
     React.useEffect(() => {
         if (menuid) {
@@ -70,6 +74,16 @@ const MenuManager = () => {
         const { row, action } = data;
         if (action === "SELECTED") {
             setProductSelect([...row])
+        } else if (action === "DELETE") {
+            bHClient.productionDel({
+                ...new ProductionModel(),
+                ...row.data
+            }).then((res: any) => {
+
+                BHNotification(res.status, res.message, enqueueSnackbar)
+                setReload(!reload);
+
+            }).catch(err => console.log(err))
         } else if (action !== "ADD") {
             setAction({
                 ...action,
@@ -79,12 +93,6 @@ const MenuManager = () => {
             });
         }
         else if (action === "ADD") {
-            setAction({
-                ...action,
-                open: true,
-                payload: action
-            });
-        } else if (action === "ADD") {
             setAction({
                 ...action,
                 open: true,
@@ -105,6 +113,7 @@ const MenuManager = () => {
                         onClose={() => setAction({ ...action, open: false })}
                         row={action.data}
                         open={action.open}
+                        onReload={() => setReload(!reload)}
                     />
                 }, [action.open])
             }

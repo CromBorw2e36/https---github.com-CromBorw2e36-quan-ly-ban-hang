@@ -189,18 +189,24 @@ namespace QLyBanHang_A.Controllers
         // DELETE: api/BhproductMasters/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBhproductMaster(string id)
-        {
+            {
             if (_context.BhproductDetails == null)
             {
                 return NotFound();
             }
-            var BhproductDetail = await _context.BhproductDetails.FindAsync(id);
+
+            if (id == null || id == "")
+                return BadRequest();
+
+            var BhproductDetail = await _context.BhproductDetails.Where(p => p.Id == id).FirstOrDefaultAsync();
+
             if (BhproductDetail == null)
             {
                 return NotFound();
             }
 
             _context.BhproductDetails.Remove(BhproductDetail);
+
             await _context.SaveChangesAsync();
 
             return Ok(new Message(0, "Đã xóa"));
