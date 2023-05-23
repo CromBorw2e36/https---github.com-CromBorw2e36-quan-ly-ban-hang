@@ -10,6 +10,10 @@ import { TransitionProps } from '@mui/material/transitions';
 import { BhClient, ProductionModel } from '../../../common/interface/BHInterface';
 import "./index.css";
 import { Box, CardMedia, Divider, FormControlLabel, Switch, Typography, styled } from '@mui/material';
+import { uploadFile } from '../../../common/api/get-apit';
+import BHNotification from '../../../component/BH/Notification/Notification';
+import Loading from '../../../component/linearIndeterminate/linearIndeterminate';
+import { useSnackbar } from 'notistack';
 
 
 
@@ -63,7 +67,7 @@ interface IProps {
     action: string | undefined;
 
     row?: any;
-    onReload?: () => void;
+    onReload: () => void;
 
 
 }
@@ -76,6 +80,10 @@ export default function ActionMenuManager(props: IProps) {
 
     const [product, setProduct] = React.useState<ProductionModel>({} as ProductionModel);
 
+    const [isLoading, setLoading] = React.useState<boolean>(false);
+
+
+    const { enqueueSnackbar } = useSnackbar();
 
     React.useEffect(() => {
         if (props.action === "ADD") {
@@ -92,63 +100,110 @@ export default function ActionMenuManager(props: IProps) {
     const handleChange = (e: any) => {
 
         if (props.action !== "DETAIL") {
+
             const { name, value } = e.target;
+
             if (name !== 'status') {
+
                 setProduct({
                     ...product,
                     [name]: value
                 } as ProductionModel);
+
             } else {
+
                 setProduct({
                     ...product,
                     [name]: e.target.checked
                 } as ProductionModel);
+
             }
+
         }
+
     }
 
     const handleSumit = () => {
+
+        setLoading(true);
+
         switch (props.action) {
             case "ADD":
                 bHClient.productionIns({
                     ...product,
                     c_User: SessionLogin.username,
                     ma_ch: SessionLogin.ma_ch
-                }).then(result => {
-                    console.log(result)
+                }).then(res => {
+
+
+
+                    BHNotification(res.status, res.message, enqueueSnackbar);
+
+                    props.onReload();
+
+                    setLoading(false);
+
                 }).catch(error => {
+
                     console.log(error)
+                    setLoading(false);
+
                 })
                 break;
             case "EDIT":
                 bHClient.productionUpd({
                     ...product,
-                }).then(result => {
-                    console.log(result)
+                }).then(res => {
+
+                    setLoading(false);
+
+                    BHNotification(res.status, res.message, enqueueSnackbar)
+
+                    props.onReload();
+
+
+
                 }).catch(error => {
+
+                    setLoading(false);
                     console.log(error)
+
                 })
                 break;
         }
     }
 
+    const handleRemove = (image: string) => {
+        if (product.images) {
+            const images = product.images.split(";");
+            setProduct({
+                ...product,
+                images: images.filter(item => item != image).join(';')
+            })
+        }
+    }
+
+
+    const handleUpload = (e: any) => {
+        const { name, value } = e.target;
+        uploadFile(value)
+    }
 
     return (
         <div>
             <Dialog
-                id="sysMenu"
+                id="sysMenu3"
                 open={props.open || false}
                 TransitionComponent={Transition}
-                keepMounted
                 onClose={props.onClose}
                 aria-describedby="alert-dialog-slide-description"
+                maxWidth='sm'
             >
                 <DialogTitle>
-
                     <Typography className="text-center"
                         sx={{
                             fontSize: 24,
-                            fontWeight: "500",
+                            fontWeight: "600",
                             color: "#2295FF"
                         }}
                     >
@@ -180,7 +235,7 @@ export default function ActionMenuManager(props: IProps) {
                                 className="form-control form-control-user"
                                 id="form-product-price"
                                 placeholder="Giá"
-                                name='Price'
+                                name='price'
                                 onChange={handleChange}
                                 value={product?.price || ""}
 
@@ -248,39 +303,55 @@ export default function ActionMenuManager(props: IProps) {
                             <input
                                 type="file"
                                 accept="image/*"
-                                className="form-control form-control-user d-none"
+                                className="d-none"
                                 id="upImage"
-                                placeholder="Số lượng"
+                                placeholder="Hình ảnh"
                                 name='image'
+                                onChange={handleUpload}
                             />
-                            <Box
+                            {
+                                product.images
+                                && (
+                                    <Box
+                                        sx={{
+                                            height: "400px",
+                                            overflowY: "scroll",
+                                            width: "100%",
+                                            scrollbarWidth: "2px",
+                                        }}>
+                                        {
+                                            product.images.split(';').map(image => (
+                                                <Box sx={{ height: 240, width: '45%', float: 'left', margin: '4px', position: 'relative' }}>
+                                                    <CardMedia
+                                                        sx={{ height: '100%', width: "100%" }}
+                                                        image="https://th.bing.com/th/id/OIP.DlhXGRMzqOTFwwvO7f3N4AHaEi?pid=ImgDet&rs=1"
+                                                        title="green iguana"
+                                                    />
 
-                                sx={{
-                                    height: "400px",
-                                    overflowY: "scroll",
-                                    width: "100%",
-                                    scrollbarWidth: "2px",
-                                }}>
-                                <Box sx={{ height: 240, width: '45%', float: 'left', margin: '4px', position: 'relative' }}>
-                                    <CardMedia
-                                        sx={{ height: '100%', width: "100%" }}
-                                        image="https://th.bing.com/th/id/OIP.DlhXGRMzqOTFwwvO7f3N4AHaEi?pid=ImgDet&rs=1"
-                                        title="green iguana"
-                                    />
+                                                    <i className="fas fa-times-circle position-absolute top-0 end-0 m-2 text-danger" onClick={() => handleRemove(image)}></i>
 
-                                    <i className="fas fa-times-circle position-absolute top-0 end-0 m-2 text-danger"></i>
-
-                                </Box>
-                            </Box>
+                                                </Box>
+                                            ))
+                                        }
+                                    </Box>
+                                )
+                            }
                         </div>
                     </div>
 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.onClose}>Đóng</Button>
-                    <Button variant='contained' onClick={handleSumit}>Agree</Button>
+                    {
+                        props.action !== "DETAIL"
+                        && <Button variant='contained' onClick={handleSumit}>Agree</Button>
+
+                    }
                 </DialogActions>
             </Dialog>
-        </div>
+
+            <Loading isLoading={isLoading} />
+
+        </div >
     );
 }

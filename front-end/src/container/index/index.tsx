@@ -8,7 +8,7 @@ import Production from '../productions/production'
 import PaymentVoucher from '../payment-voucher/payment-voucher'
 import Profiler from '../profile/profiler'
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import MenuManager from '../menu-manager/menu-manager'
+import MenuManager from '../admin/menu-manager/menu-manager'
 import { SysMenuRoleModel } from '../../common/interface/BHInterface'
 import { postApiAll } from '../../common/api/get-apit'
 import { CommonConfig } from '../../common/commonConfig'
@@ -83,7 +83,9 @@ const Index = () => {
 
     return (
 
-        <div id="wrapper">
+        <div id="wrapper" style={{
+            height: '100vh'
+        }}>
             {
                 sysMenus
                 && <Sidebar
@@ -92,7 +94,13 @@ const Index = () => {
                     handleLogout={() => handleLogout()}
                 />
             }
-            <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content-wrapper" className="d-flex flex-column" 
+
+                style={{
+                    height: "100vh",
+                    overflow: 'hidden'
+                }}
+            >
                 <div id="content">
 
                     <Toolbar />

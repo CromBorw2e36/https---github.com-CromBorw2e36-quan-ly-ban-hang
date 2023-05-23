@@ -1,0 +1,7 @@
+.box-product {
+    overflow: scroll !important;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #bfdbfe !important;
+}

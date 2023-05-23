@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import DataGrid, { Button, Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, Scrolling, Selection } from 'devextreme-react/data-grid';
+import DataGrid, { Button, Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Pager, Paging, Scrolling, Selection } from 'devextreme-react/data-grid';
 import { SysClient, SysRawTableModel } from '../../../common/interface/BHInterface';
 import 'devextreme/data/odata/store';
 import { Paper } from '@mui/material';
+import "./index.css";
+
 
 enum SCROLINGS {
   infinite,
@@ -130,9 +132,13 @@ const BHDataGrid = (props: Iprops) => {
         hoverStateEnabled={true}
 
       >
+
         <Selection mode="multiple" />
+
         <ColumnChooser enabled={props.ColumnChooser || false} />
+
         <ColumnFixing enabled={true} />
+
         {
           columns
           && columns.map(col => (
@@ -163,7 +169,19 @@ const BHDataGrid = (props: Iprops) => {
         </Column>
 
 
-        <Scrolling columnRenderingMode="virtual" />
+        <Paging defaultPageSize={10} />
+        
+        <Pager
+          visible={true}
+          allowedPageSizes={true}
+          displayMode={false}
+          showPageSizeSelector={true}
+          showInfo={true}
+          showNavigationButtons={true} 
+          />
+
+
+        {/* <Scrolling columnRenderingMode="virtual" /> */}
         <Paging enabled={false} />
         <FilterRow visible={props.FilterRow || false} />
         <HeaderFilter visible={props.HeaderFilter || true} />

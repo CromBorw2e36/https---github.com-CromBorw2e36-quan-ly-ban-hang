@@ -187,7 +187,7 @@ export class BhClient {
     }
 
     productionDel(body: ProductionModel) {
-        return deleteApiAll("/api/BHproducts/ProductDel", body);
+        return deleteApiAll("/api/BHproducts", body);
     }
 
 }

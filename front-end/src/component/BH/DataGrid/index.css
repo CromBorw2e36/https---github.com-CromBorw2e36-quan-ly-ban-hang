@@ -1,0 +1,9 @@
+.dx-header-filter {
+    display: none !important;
+    font-size: 10px !important;
+    transition: ease 0.5s !important;
+}
+
+.dx-datagrid-action:hover .dx-header-filter {
+    display: inline-block !important;
+}
